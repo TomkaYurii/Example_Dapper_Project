@@ -17,7 +17,6 @@ namespace Dapper_Example_Project.Repositories
             string sql = @"SELECT TOP 5 * FROM Category";
             var results = await _sqlConnection.QueryAsync<Category>(sql,
                 transaction: _dbTransaction);
-            var X = results;
             return results;
         }
     }

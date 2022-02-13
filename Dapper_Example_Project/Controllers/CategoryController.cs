@@ -158,7 +158,6 @@ namespace Dapper_Example_Project.Controllers
                 _logger.LogError($"Something went wrong inside Catalog action: {ex.Message}");
                 return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
             }
-
         }
     }
 }
