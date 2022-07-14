@@ -1,0 +1,22 @@
+{
+  "profiles": {
+    "ConsoleApplicationExample.Development": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    },
+    "ConsoleApplicationExample.Acceptance": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Acceptance"
+      }
+    },
+    "ConsoleApplicationExample.Production": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Production"
+      }
+    }
+  }
+}
