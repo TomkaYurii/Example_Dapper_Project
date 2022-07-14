@@ -8,6 +8,6 @@ namespace ConsoleApplicationExample.Services.Interfaces
 {
     public interface ICategoryService
     {
-        public void GetAllInfoAboutCategory();
+        public Task GetAllInfoAboutCategory(int id);
     }
 }

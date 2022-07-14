@@ -16,13 +16,24 @@ namespace ConsoleApplicationExample.Services
             _unitOfWork = uow;
         }
 
-        public void GetAllInfoAboutCategory()
+        public async Task GetAllInfoAboutCategory(int id)
         {
-            int id = 1;
             var category = _unitOfWork._categoryRepository.GetAsync(id).Result;
-            Console.WriteLine("Інфорпмація про категорію - {0}", category.Name);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("-->> Зведена інформація про категорію");
+            Console.WriteLine("-->> Назва категорії - \t" + category.Name);
+            Console.WriteLine("-->> Характеристики категорії - \t" + category.Properties);
 
-            Console.WriteLine("Job is Done! from the Console Product Service");
+            var category_of_product = await _unitOfWork._productRepository.ProductByCategoryAsync(category.Id);
+
+            Console.WriteLine("-->> Всі товари, що відносяться до відповідної категорії");
+            foreach (var product in category_of_product)
+            {
+                Console.WriteLine("-->> Товар  - " + product.Name + "\t ID товару - " + product.Id);
+            }
+            Console.WriteLine("" + Environment.NewLine);
+            Console.ResetColor();
+
         }
     }
 }

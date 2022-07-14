@@ -2,6 +2,6 @@
 {
     public interface IProductRepository : IGenericRepository<Product>
     {
-        Task<IEnumerable<Product>> ProductByCategoryASync(int CategoryId);
+        Task<IEnumerable<Product>> ProductByCategoryAsync(int CategoryId);
     }
 }

@@ -17,28 +17,41 @@ namespace WinFormsApp
         static void Main()
         {
             var host = Host.CreateDefaultBuilder()
-                .ConfigureServices((context, services) =>
-                {
-                    
-                    services.AddScoped<IProductRepository, ProductRepository>();
-                    services.AddScoped<ICategoryRepository, CategoryRepository>();
-                    services.AddScoped<IUnitOfWork, UnitOfWork>();
+             .ConfigureServices((hostContext, services) =>
+             {
+                // Connection/Transaction for database
+                 services.AddScoped((s) => new SqlConnection(hostContext.Configuration.GetConnectionString("MSSQLConnection")));
+                 services.AddScoped<IDbTransaction>(s =>
+                 {
+                     SqlConnection conn = s.GetRequiredService<SqlConnection>();
+                     conn.Open();
+                     return conn.BeginTransaction();
+                 });
 
-                    services.AddScoped((s) => new SqlConnection(context.Configuration.GetConnectionString("MSSQLConnection")));
-                    services.AddScoped<IDbTransaction>(s =>
-                    {
-                        SqlConnection conn = s.GetRequiredService<SqlConnection>();
-                        conn.Open();
-                        return conn.BeginTransaction();
-                    });
-                })
-                .Build();
+                // Dependendency Injection for Repositories/UOF from DAL
+                 services.AddScoped<IProductRepository, ProductRepository>();
+                 services.AddScoped<ICategoryRepository, CategoryRepository>();
+                 services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 
+                 services.AddScoped<Form1>();
+             })
+             .ConfigureAppConfiguration((hostingContext, config) =>
+             {
+                 var env = hostingContext.HostingEnvironment;
+                 config.AddEnvironmentVariables();
+                 config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+                 config.AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: false, reloadOnChange: true);
+             })
+             .Build();
+
+            using IServiceScope serviceScope = host.Services.CreateScope();
+            IServiceProvider provider = serviceScope.ServiceProvider;
+            var formSVC = provider.GetRequiredService<Form1>();
             // To customize application configuration such as set high DPI settings or default font,
             //// see https://aka.ms/applicationconfiguration.
             //ApplicationConfiguration.Initialize();
-            //Application.Run(new Form1());
+            Application.Run(formSVC);
         }
     }
 }

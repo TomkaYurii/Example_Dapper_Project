@@ -21,7 +21,7 @@ namespace ConsoleApplicationExample.Services
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("-->> Зведена інформація про продукт");
-            Console.WriteLine("-->> Назва продукту - \t" +  { product.Name, 10});
+            Console.WriteLine("-->> Назва продукту - \t" +   product.Name);
             Console.WriteLine("-->> Характеристики продукту - \t" + product.Properties);
             Console.WriteLine("-->> Ціна продукту - \t" + product.Price);
             Console.WriteLine("-->> Продавець продукту - \t" + product.Seller);

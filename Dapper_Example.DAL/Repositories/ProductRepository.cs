@@ -12,7 +12,7 @@ namespace Dapper_Example.DAL.Repositories
         {
         }
 
-        public async Task<IEnumerable<Product>> ProductByCategoryASync (int productsCategoryId)
+        public async Task<IEnumerable<Product>> ProductByCategoryAsync (int productsCategoryId)
         {
             string sql = @"SELECT * FROM Product WHERE CategoryId = @ProductsCategoryId";
 
