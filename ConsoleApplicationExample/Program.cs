@@ -109,7 +109,7 @@ async Task<bool> MainMenuAsync()
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine(ex.Message);
                 Console.ResetColor();
-                Console.WriteLine("Тицькай кнопку щоб продовжити");
+                Console.WriteLine("Тицькай кнопку аби продовжити");
                 Console.ReadKey();
                 return true;
             }
@@ -140,7 +140,7 @@ async Task<bool> MainMenuAsync()
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine(ex.Message);
                 Console.ResetColor();
-                Console.WriteLine("Тицькай кнопку щоб продовжити");
+                Console.WriteLine("Тицькай кнопку аби продовжити");
                 Console.ReadKey();
                 return true;
             }
